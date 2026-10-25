@@ -1,10 +1,18 @@
 language: go
 
+dist: trusty
+
 go:
   - 1.6
   - 1.7
   - 1.8
-  - tip
+  - "1.11"
+
+before_install:
+  - eval "$(gimme ${TRAVIS_GO_VERSION})"
+  - mkdir -p "${GOPATH}/src/github.com/Masterminds"
+  - cp -r "${TRAVIS_BUILD_DIR}" "${GOPATH}/src/github.com/Masterminds/goutils"
+  - cd "${GOPATH}/src/github.com/Masterminds/goutils"
 
 script:
   - go test -v
